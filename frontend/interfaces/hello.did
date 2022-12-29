@@ -1,0 +1,3 @@
+service: {
+    "hello_world": () -> (text) query;
+}

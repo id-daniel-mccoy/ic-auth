@@ -1,0 +1,57 @@
+html {
+    background-color: #303030;
+}
+
+.app {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+  
+.header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 70px;
+    width: 100%;
+    background-color: #202020;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    color: #ffcf40;
+    font-size: 18px;
+}
+  
+.content {
+    margin-top: 100px;
+    height: auto;
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    font-size: 20px;
+    color: #e7e7e7;
+}
+  
+button {
+    background: none;
+    border: 1px solid #e7e7e7;
+    width: auto;
+    border-radius: 10px;
+    width: 140px;
+    font-size: 14px;
+    padding: 8px 10px;
+    color: lightgoldenrodyellow;
+    cursor: pointer;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+  
+button:hover {
+    background-color: rgba(255,255,255,0.1);
+}
