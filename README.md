@@ -1,7 +1,7 @@
-# multi-wallet-menu
+# Multi IC Wallet Menu
 ## Version 0.3.1
 
-A modular typescript react framework for a login menu that supports multiple login providers.
+A modular typescript react framework for a login menu that supports multiple internet computer login providers.
 
 ### Getting Setup:
 

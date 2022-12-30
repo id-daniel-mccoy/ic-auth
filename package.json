@@ -1,6 +1,6 @@
 {
-  "name": "quick-ic-react",
-  "version": "0.0.0",
+  "name": "multi-wallet-menu",
+  "version": "0.3.1",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
