@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from "react"
-// @ts-ignore
-import {StoicIdentity} from "ic-stoic-identity";
-import {Actor, HttpAgent} from "@dfinity/agent";
-import * as helloIDL from "./interfaces/hello";
-import { Stoic } from "./components/Stoic";
+import { StoicWallet as Stoic } from "./components/Stoic";
 import { PlugWallet as Plug} from "./components/Plug";
 import { InfinityWallet as Infinity} from "./components/Infinity";
 
 export function MainPage() {
 
-  const filler = "This is content!";
+  const [user, setUser] = useState("Not Connected");
+
+  const changeUserAuth = async(user: string) => {
+    setUser(user);
+  }
 
   return (
     <div className="app">
@@ -17,10 +17,12 @@ export function MainPage() {
         <h1>Welcome!</h1>
       </div>
       <div className="content">
-        <p>{filler}</p>
-        <Stoic />
-        <Plug />
-        <Infinity />
+        <h3>Wallet Testing</h3>
+        <Stoic changeProvider={changeUserAuth}/>
+        <Plug changeProvider={changeUserAuth}/>
+        <Infinity changeProvider={changeUserAuth}/>
+        <p>User Logged In:</p>
+        <p>{user}</p>
       </div>
     </div>
   )

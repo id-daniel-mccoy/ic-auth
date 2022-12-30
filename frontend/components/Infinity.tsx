@@ -1,33 +1,35 @@
 import React, { useRef, useState } from "react"
+import { Principal } from "@dfinity/principal";
 import '../assets/plugWallet.css';
 import * as helloIDL from "../interfaces/hello";
 
-export function InfinityWallet() {
+export function InfinityWallet(props: any) {
 
-  // convert the variables above to state variables
-  const [userPrincipal, setUserPrincipal] = useState("Not Connected");
+  const changeProvider = props.changeProvider;
   const [infinityButtonText, setInfinityButtonText] = useState("Infinity Connect");
   const buttonState = useRef<HTMLButtonElement>(null);
   const infinityStatus = useRef<HTMLDivElement>(null);
 
   const manageLogin = async() => {
     await (window as any).ic.infinityWallet.requestConnect();
-    const theUserPrincipal = await (window as any).ic.infinityWallet.getPrincipal();
-    console.log(theUserPrincipal);
-    setUserPrincipal(theUserPrincipal.toText());
+    const theUserPrincipal = Principal.from(await (window as any).ic.infinityWallet.getPrincipal()).toText();
+    changeProvider(theUserPrincipal);
     infinityStatus.current!.style.backgroundColor = "rgba(0,255,0,0.5)";
     setInfinityButtonText("Connected!");
     buttonState.current!.disabled = true;
-    console.log("Logged in as: " + userPrincipal);
   }
 
   const infinityLogin = async() => {
-    await manageLogin();
-    const theUserPrincipal = await (window as any).ic.infinityWallet.getPrincipal();
-    setUserPrincipal(theUserPrincipal.toText());
-    infinityStatus.current!.style.backgroundColor = "rgba(0,255,0,0.5)";
-    setInfinityButtonText("Connected!");
-    buttonState.current!.disabled = true;
+    const hasLoggedIn = await (window as any).ic.infinityWallet.isConnected();
+    if(!hasLoggedIn) {
+      await manageLogin();
+    } else {
+      const theUserPrincipal = Principal.from(await (window as any).ic.infinityWallet.getPrincipal()).toText();
+      changeProvider(theUserPrincipal);
+      infinityStatus.current!.style.backgroundColor = "rgba(0,255,0,0.5)";
+      setInfinityButtonText("Connected!");
+      buttonState.current!.disabled = true;
+    }
   }
 
   const createInfinityActor = async () => {

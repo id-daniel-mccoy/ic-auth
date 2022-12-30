@@ -1,23 +1,22 @@
 import React, { useRef, useState } from "react"
+import { Principal } from "@dfinity/principal";
 import '../assets/plugWallet.css';
 import * as helloIDL from "../interfaces/hello";
 
-export function PlugWallet() {
+export function PlugWallet(props: any) {
 
-  // convert the variables above to state variables
-  const [userPrincipal, setUserPrincipal] = useState("Not Connected");
+  const changeProvider = props.changeProvider;
   const [plugButtonText, setPlugButtonText] = useState("Plug Connect");
   const buttonState = useRef<HTMLButtonElement>(null);
   const plugStatus = useRef<HTMLDivElement>(null);
 
   const manageLogin = async() => {
     await (window as any).ic.plug.requestConnect();
-    const theUserPrincipal = await (window as any).ic.plug.agent.getPrincipal();
-    setUserPrincipal(theUserPrincipal.toText());
+    const theUserPrincipal = Principal.from(await (window as any).ic.plug.agent.getPrincipal()).toText();
+    changeProvider(theUserPrincipal);
     plugStatus.current!.style.backgroundColor = "rgba(0,255,0,0.5)";
     setPlugButtonText("Connected!");
     buttonState.current!.disabled = true;
-    console.log("Logged in as: " + userPrincipal);
   }
 
   const plugLogin = async() => {
@@ -26,12 +25,11 @@ export function PlugWallet() {
       await manageLogin();
     } else {
       await (window as any).ic.plug.createAgent();
-      const theUserPrincipal = await (window as any).ic.plug.agent.getPrincipal();
-      setUserPrincipal(theUserPrincipal.toText());
+      const theUserPrincipal = Principal.from(await (window as any).ic.plug.agent.getPrincipal()).toText();
+      changeProvider(theUserPrincipal);
       plugStatus.current!.style.backgroundColor = "rgba(0,255,0,0.5)";
       setPlugButtonText("Connected!");
       buttonState.current!.disabled = true;
-      console.log("Logged in as: " + userPrincipal);
     }
   }
 

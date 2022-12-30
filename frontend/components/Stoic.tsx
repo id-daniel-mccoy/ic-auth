@@ -5,8 +5,9 @@ import {Actor, HttpAgent} from "@dfinity/agent";
 import * as helloIDL from "../interfaces/hello";
 import "../assets/plugWallet.css";
 
-export function Stoic() {
+export function StoicWallet(props: any) {
 
+  const changeProvider = props.changeProvider;
   const [stoicButtonText, setStoicButtonText] = useState("Stoic Connect");
   const buttonState = useRef<HTMLButtonElement>(null);
   const stoicStatus = useRef<HTMLDivElement>(null);
@@ -15,12 +16,11 @@ export function Stoic() {
     let identity;
     // @ts-ignore
     StoicIdentity.load().then(async identity => {
-      if (identity !== false) {
-        console.log("You have already logged in with Stoic.");
-      } else {
+      if (identity == false) {
         identity = await StoicIdentity.connect();
       }
-      console.log("Logged In With: " + identity.getPrincipal().toText());
+      const theUserPrincipal = identity.getPrincipal().toText();
+      changeProvider(theUserPrincipal);
       setStoicButtonText("Connected!");
       buttonState.current!.disabled = true;
       stoicStatus.current!.style.backgroundColor = "rgba(0,255,0,0.5)";
