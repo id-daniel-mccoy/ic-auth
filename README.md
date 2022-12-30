@@ -1,5 +1,5 @@
 # Multi IC Wallet Menu
-## Version 0.3.1
+## Version 0.4.0
 
 A modular typescript react framework for a login menu that supports multiple internet computer login providers.
 
@@ -26,7 +26,7 @@ dfx canister create --all
 dfx build
 ```
 
-### Dev/Production"
+### Dev/Production:
 
 Dev Mode:
 ```

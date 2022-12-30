@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react"
 import { StoicWallet as Stoic } from "./components/Stoic";
 import { PlugWallet as Plug} from "./components/Plug";
 import { InfinityWallet as Infinity} from "./components/Infinity";
+import { InternetIdentity } from "./components/InternetIdentity";
 
 export function MainPage() {
 
@@ -21,6 +22,7 @@ export function MainPage() {
         <Stoic changeProvider={changeUserAuth}/>
         <Plug changeProvider={changeUserAuth}/>
         <Infinity changeProvider={changeUserAuth}/>
+        <InternetIdentity changeProvider={changeUserAuth}/>
         <p>User Logged In:</p>
         <p>{user}</p>
       </div>
