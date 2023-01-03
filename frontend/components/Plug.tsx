@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react"
 import { Principal } from "@dfinity/principal";
-import '../assets/plugWallet.css';
+import "../assets/index.css"
 import * as helloIDL from "../interfaces/hello";
 
 export function PlugWallet(props: any) {
@@ -27,7 +27,7 @@ export function PlugWallet(props: any) {
       await (window as any).ic.plug.createAgent();
       const theUserPrincipal = Principal.from(await (window as any).ic.plug.agent.getPrincipal()).toText();
       changeProvider(theUserPrincipal);
-      plugStatus.current!.style.backgroundColor = "rgba(0,255,0,0.5)";
+      plugStatus.current!.style.backgroundColor = "#42ff0f";
       setPlugButtonText("Connected!");
       buttonState.current!.disabled = true;
     }
@@ -50,7 +50,7 @@ export function PlugWallet(props: any) {
   return (
     <>
       <div className="walletContainer">
-        <button ref={buttonState} onClick={testPlug} id='plugMenu' className='plugMenu'>{plugButtonText}<div ref={plugStatus} className='statusBubble' id='statusBubble'></div></button>
+        <button ref={buttonState} onClick={testPlug} id='plugMenu'><p>{plugButtonText}</p><div ref={plugStatus} className='statusBubble' id='statusBubble'></div></button>
       </div>
     </>
   )

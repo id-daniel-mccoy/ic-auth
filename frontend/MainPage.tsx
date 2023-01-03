@@ -1,8 +1,10 @@
-import React, { useEffect, useState } from "react"
+import React, { useState } from "react"
 import { StoicWallet as Stoic } from "./components/Stoic";
 import { PlugWallet as Plug} from "./components/Plug";
 import { InfinityWallet as Infinity} from "./components/Infinity";
 import { InternetIdentity } from "./components/InternetIdentity";
+import { NFID } from "./components/NFID";
+import "./assets/index.css";
 
 export function MainPage() {
 
@@ -18,13 +20,14 @@ export function MainPage() {
         <h1>Welcome!</h1>
       </div>
       <div className="content">
-        <h3>Wallet Testing</h3>
+        <h3>Login</h3>
         <Stoic changeProvider={changeUserAuth}/>
         <Plug changeProvider={changeUserAuth}/>
         <Infinity changeProvider={changeUserAuth}/>
+        <NFID changeProvider={changeUserAuth}/>
         <InternetIdentity changeProvider={changeUserAuth}/>
-        <p>User Logged In:</p>
-        <p>{user}</p>
+        <h5>Current User:</h5>
+        <p className="data">{user}</p>
       </div>
     </div>
   )

@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react"
 import { Principal } from "@dfinity/principal";
-import '../assets/plugWallet.css';
+import '../assets/index.css'
 import * as helloIDL from "../interfaces/hello";
 
 export function InfinityWallet(props: any) {
@@ -26,7 +26,7 @@ export function InfinityWallet(props: any) {
     } else {
       const theUserPrincipal = Principal.from(await (window as any).ic.infinityWallet.getPrincipal()).toText();
       changeProvider(theUserPrincipal);
-      infinityStatus.current!.style.backgroundColor = "rgba(0,255,0,0.5)";
+      infinityStatus.current!.style.backgroundColor = "#42ff0f";
       setInfinityButtonText("Connected!");
       buttonState.current!.disabled = true;
     }
@@ -49,7 +49,7 @@ export function InfinityWallet(props: any) {
   return (
     <>
       <div className="walletContainer">
-        <button ref={buttonState} onClick={testInfinity} id='infinityMenu' className='plugMenu'>{infinityButtonText}<div ref={infinityStatus} className='statusBubble' id='statusBubble'></div></button>
+        <button ref={buttonState} onClick={testInfinity} id='infinityMenu'><p>{infinityButtonText}</p><div ref={infinityStatus} className='statusBubble' id='statusBubble'></div></button>
       </div>
     </>
   )

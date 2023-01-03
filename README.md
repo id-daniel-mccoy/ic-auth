@@ -1,7 +1,15 @@
 # Multi IC Wallet Menu
-## Version 0.4.0
+## Version 0.5.0
 
 A modular typescript react framework for a login menu that supports multiple internet computer login providers.
+
+Currently Supported:
+
+* Stoic
+* Plug
+* Internet Identity
+* Bitfinity
+* NFID
 
 ### Getting Setup:
 

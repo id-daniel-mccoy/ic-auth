@@ -5,25 +5,35 @@ import { Actor, HttpAgent } from "@dfinity/agent";
 import '../assets/index.css';
 import * as helloIDL from "../interfaces/hello";
 
-export function InternetIdentity(props: any) {
+export function NFID(props: any) {
 
   const changeProvider = props.changeProvider;
-  const [plugButtonText, setPlugButtonText] = useState("II Connect");
+  const [nfidButtonText, setnfidButtonText] = useState("NFID Connect");
   const buttonState = useRef<HTMLButtonElement>(null);
-  const plugStatus = useRef<HTMLDivElement>(null);
+  const nfidStatus = useRef<HTMLDivElement>(null);
 
   const manageLogin = async() => {
     let identity;
+    const appName = "wallet-testing";
+    const appLogo = "https://nfid.one/icons/favicon-96x96.png";
+    const authPath = "/authenticate/?applicationName="+appName+"&applicationLogo="+appLogo+"#authorize";
+    const authUrl = "https://nfid.one" + authPath;
+
     const authClient = await AuthClient.create();
     const loginResult = await authClient.login({
-      identityProvider: "https://identity.ic0.app",
+      identityProvider: authUrl,
+      // windowOpenerFeatures: {
+      //   `left=${window.screen.width / 2 - 525 / 2}, `+ 
+      //   `top=${window.screen.height / 2 - 705 / 2},` + 
+      //   `toolbar=0,location=0,menubar=0,width=525,height=705`
+      // },
       onSuccess: async () => {
         console.log("Login succeeded");
         identity = await authClient.getIdentity();
         const theUserPrincipal = Principal.from(identity.getPrincipal()).toText();
         changeProvider(theUserPrincipal);
-        plugStatus.current!.style.backgroundColor = "#42ff0f";
-        setPlugButtonText("Connected!");
+        nfidStatus.current!.style.backgroundColor = "#42ff0f";
+        setnfidButtonText("Connected!");
         buttonState.current!.disabled = true;
       },
       onError: (error) => {
@@ -57,7 +67,7 @@ export function InternetIdentity(props: any) {
   return (
     <>
       <div className="walletContainer">
-        <button ref={buttonState} onClick={testInternetIdentity} id='plugMenu'><p>{plugButtonText}</p><div ref={plugStatus} className='statusBubble' id='statusBubble'></div></button>
+        <button ref={buttonState} onClick={testInternetIdentity} id='nfidMenu'><p>{nfidButtonText}</p><div ref={nfidStatus} className='statusBubble' id='statusBubble'></div></button>
       </div>
     </>
   )

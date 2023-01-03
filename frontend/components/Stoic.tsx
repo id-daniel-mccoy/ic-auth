@@ -3,7 +3,7 @@ import React, { useEffect, useState, useRef } from "react"
 import {StoicIdentity} from "ic-stoic-identity";
 import {Actor, HttpAgent} from "@dfinity/agent";
 import * as helloIDL from "../interfaces/hello";
-import "../assets/plugWallet.css";
+import "../assets/index.css";
 
 export function StoicWallet(props: any) {
 
@@ -23,7 +23,7 @@ export function StoicWallet(props: any) {
       changeProvider(theUserPrincipal);
       setStoicButtonText("Connected!");
       buttonState.current!.disabled = true;
-      stoicStatus.current!.style.backgroundColor = "rgba(0,255,0,0.5)";
+      stoicStatus.current!.style.backgroundColor = "#42ff0f";
     });
     return identity;
   }
@@ -48,7 +48,7 @@ export function StoicWallet(props: any) {
 
   return (
     <div className="walletContainer">
-      <button ref={buttonState} onClick={testStoic} className="plugMenu">{stoicButtonText}<div ref={stoicStatus} className="statusBubble" id="statusBubble"></div></button>
+      <button ref={buttonState} onClick={testStoic}><p>{stoicButtonText}</p><div ref={stoicStatus} className="statusBubble" id="statusBubble"></div></button>
     </div>
   )
 }
