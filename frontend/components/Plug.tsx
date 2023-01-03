@@ -14,7 +14,7 @@ export function PlugWallet(props: any) {
     await (window as any).ic.plug.requestConnect();
     const theUserPrincipal = Principal.from(await (window as any).ic.plug.agent.getPrincipal()).toText();
     changeProvider(theUserPrincipal);
-    plugStatus.current!.style.backgroundColor = "rgba(0,255,0,0.5)";
+    plugStatus.current!.style.backgroundColor = "#42ff0f";
     setPlugButtonText("Connected!");
     buttonState.current!.disabled = true;
   }

@@ -1,7 +1,7 @@
 import React, { useRef, useState } from "react"
 import { Principal } from "@dfinity/principal";
 import { AuthClient } from "@dfinity/auth-client";
-import { Actor, HttpAgent } from "@dfinity/agent";
+import { Actor, HttpAgent, Identity } from "@dfinity/agent";
 import '../assets/index.css';
 import * as helloIDL from "../interfaces/hello";
 
@@ -14,50 +14,52 @@ export function InternetIdentity(props: any) {
 
   const manageLogin = async() => {
     let identity;
+    let actor;
     const authClient = await AuthClient.create();
-    const loginResult = await authClient.login({
+    await authClient.login({
       identityProvider: "https://identity.ic0.app",
       onSuccess: async () => {
-        console.log("Login succeeded");
         identity = await authClient.getIdentity();
         const theUserPrincipal = Principal.from(identity.getPrincipal()).toText();
         changeProvider(theUserPrincipal);
         plugStatus.current!.style.backgroundColor = "#42ff0f";
         setPlugButtonText("Connected!");
         buttonState.current!.disabled = true;
+        actor = await createInternetIdentityActor(identity);
+        try {
+          const result = await actor.hello_world();
+          console.log(result);
+        } catch (error) {
+          console.log(error);
+          return;
+        }
       },
-      onError: (error) => {
-        console.log("Login failed", error);
+      onError: async (error) => {
+        console.log("Login Failed:\n\n" + error);
+        return "Error";
       },
     });
-    return identity;
   }
 
-  const createInternetIdentityActor = async () => {
-    // @ts-ignore
-    let identity = await manageLogin();
+  const createInternetIdentityActor = async (user: Identity) => {
+    let actor;
+    const identity = user;
     const host = "https://ic0.app";
     const idlFactory = helloIDL.idlFactory;
-    const actor = Actor.createActor(idlFactory, {
+    actor = await Actor.createActor(idlFactory, {
       agent: new HttpAgent({ identity, host }),
       canisterId: "oyjva-2yaaa-aaaam-qbaya-cai"
     });
     return actor;
   }
 
-  const testInternetIdentity = async () => {
-    await manageLogin();
-    const actor = await createInternetIdentityActor();
-    const result = await actor.hello_world();
-    console.log(result);
-  }
 
 // HTML(UI) returns stay inside of the export function
 
   return (
     <>
       <div className="walletContainer">
-        <button ref={buttonState} onClick={testInternetIdentity} id='plugMenu'><p>{plugButtonText}</p><div ref={plugStatus} className='statusBubble' id='statusBubble'></div></button>
+        <button ref={buttonState} onClick={manageLogin} id='plugMenu'><p>{plugButtonText}</p><div ref={plugStatus} className='statusBubble' id='statusBubble'></div></button>
       </div>
     </>
   )

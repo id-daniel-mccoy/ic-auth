@@ -14,7 +14,7 @@ export function InfinityWallet(props: any) {
     await (window as any).ic.infinityWallet.requestConnect();
     const theUserPrincipal = Principal.from(await (window as any).ic.infinityWallet.getPrincipal()).toText();
     changeProvider(theUserPrincipal);
-    infinityStatus.current!.style.backgroundColor = "rgba(0,255,0,0.5)";
+    infinityStatus.current!.style.backgroundColor = "#42ff0f";
     setInfinityButtonText("Connected!");
     buttonState.current!.disabled = true;
   }

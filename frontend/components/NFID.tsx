@@ -1,7 +1,7 @@
 import React, { useRef, useState } from "react"
 import { Principal } from "@dfinity/principal";
 import { AuthClient } from "@dfinity/auth-client";
-import { Actor, HttpAgent } from "@dfinity/agent";
+import { Actor, HttpAgent, Identity } from "@dfinity/agent";
 import '../assets/index.css';
 import * as helloIDL from "../interfaces/hello";
 
@@ -12,54 +12,50 @@ export function NFID(props: any) {
   const buttonState = useRef<HTMLButtonElement>(null);
   const nfidStatus = useRef<HTMLDivElement>(null);
 
-  const manageLogin = async() => {
+  const manageLogin = async () => {
     let identity;
+    let actor;
     const appName = "wallet-testing";
     const appLogo = "https://nfid.one/icons/favicon-96x96.png";
     const authPath = "/authenticate/?applicationName="+appName+"&applicationLogo="+appLogo+"#authorize";
     const authUrl = "https://nfid.one" + authPath;
 
     const authClient = await AuthClient.create();
-    const loginResult = await authClient.login({
+    await authClient.login({
       identityProvider: authUrl,
-      // windowOpenerFeatures: {
-      //   `left=${window.screen.width / 2 - 525 / 2}, `+ 
-      //   `top=${window.screen.height / 2 - 705 / 2},` + 
-      //   `toolbar=0,location=0,menubar=0,width=525,height=705`
-      // },
       onSuccess: async () => {
-        console.log("Login succeeded");
         identity = await authClient.getIdentity();
         const theUserPrincipal = Principal.from(identity.getPrincipal()).toText();
         changeProvider(theUserPrincipal);
         nfidStatus.current!.style.backgroundColor = "#42ff0f";
         setnfidButtonText("Connected!");
         buttonState.current!.disabled = true;
+        actor = await createInternetIdentityActor(identity);
+        try {
+          const result = await actor.hello_world();
+          console.log(result);
+        } catch (error) {
+          console.log(error);
+          return;
+        }
       },
-      onError: (error) => {
-        console.log("Login failed", error);
+      onError: async (error) => {
+        console.log("Login Failed:\n\n" + error);
+        return "Error";
       },
     });
-    return identity;
   }
 
-  const createInternetIdentityActor = async () => {
-    // @ts-ignore
-    let identity = await manageLogin();
+  const createInternetIdentityActor = async (user: Identity) => {
+    let actor;
+    const identity = user;
     const host = "https://ic0.app";
     const idlFactory = helloIDL.idlFactory;
-    const actor = Actor.createActor(idlFactory, {
+    actor = await Actor.createActor(idlFactory, {
       agent: new HttpAgent({ identity, host }),
       canisterId: "oyjva-2yaaa-aaaam-qbaya-cai"
     });
     return actor;
-  }
-
-  const testInternetIdentity = async () => {
-    await manageLogin();
-    const actor = await createInternetIdentityActor();
-    const result = await actor.hello_world();
-    console.log(result);
   }
 
 // HTML(UI) returns stay inside of the export function
@@ -67,7 +63,7 @@ export function NFID(props: any) {
   return (
     <>
       <div className="walletContainer">
-        <button ref={buttonState} onClick={testInternetIdentity} id='nfidMenu'><p>{nfidButtonText}</p><div ref={nfidStatus} className='statusBubble' id='statusBubble'></div></button>
+        <button ref={buttonState} onClick={manageLogin} id='nfidMenu'><p>{nfidButtonText}</p><div ref={nfidStatus} className='statusBubble' id='statusBubble'></div></button>
       </div>
     </>
   )
