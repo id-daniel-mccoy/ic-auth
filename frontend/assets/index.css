@@ -45,10 +45,12 @@ html {
 button {
     background: none;
     border: 1px solid #12fff9;
-    border-radius: 10px;
-    width: 160px;
-    height: 45px;
+    border-radius: 12px;
+    width: 180px;
+    height: 48px;
     font-size: 14px;
+    font-weight: bold;
+    letter-spacing: 0.8px;
     text-align: center;
     padding: 8px 12px;
     color: lightgoldenrodyellow;

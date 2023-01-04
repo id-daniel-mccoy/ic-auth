@@ -1,6 +1,6 @@
 {
   "name": "multi-wallet-menu",
-  "version": "0.5.3",
+  "version": "0.5.4",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
