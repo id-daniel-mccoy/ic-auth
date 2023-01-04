@@ -1,16 +1,13 @@
 import React, { useState } from "react"
-import { StoicWallet as Stoic } from "./components/Stoic";
-import { PlugWallet as Plug} from "./components/Plug";
-import { InfinityWallet as Infinity} from "./components/Infinity";
-import { InternetIdentity } from "./components/InternetIdentity";
-import { NFID } from "./components/NFID";
+import { ICWalletList } from "./components/ICWalletList";
 import "./assets/index.css";
 
 export function MainPage() {
 
   const [user, setUser] = useState("Not Connected");
+  const [provider, setProvider] = useState("None");
 
-  const changeUserAuth = async(user: string) => {
+  const receiveFromChild = async(user: string) => {
     setUser(user);
   }
 
@@ -21,11 +18,7 @@ export function MainPage() {
       </div>
       <div className="content">
         <h3>Login</h3>
-        <Stoic changeProvider={changeUserAuth}/>
-        <Plug changeProvider={changeUserAuth}/>
-        <Infinity changeProvider={changeUserAuth}/>
-        <NFID changeProvider={changeUserAuth}/>
-        <InternetIdentity changeProvider={changeUserAuth}/>
+        <ICWalletList giveToParent={receiveFromChild} />
         <h5>Current User:</h5>
         <p className="data">{user}</p>
       </div>

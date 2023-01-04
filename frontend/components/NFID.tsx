@@ -2,13 +2,15 @@ import React, { useRef, useState } from "react"
 import { Principal } from "@dfinity/principal";
 import { AuthClient } from "@dfinity/auth-client";
 import { Actor, HttpAgent, Identity } from "@dfinity/agent";
-import '../assets/index.css';
 import * as helloIDL from "../interfaces/hello";
+import NFIDLogo from "../assets/logos/nfid.png"
+import '../assets/index.css';
 
 export function NFID(props: any) {
 
   const changeProvider = props.changeProvider;
-  const [nfidButtonText, setnfidButtonText] = useState("NFID Connect");
+  const [nfidButtonText, setnfidButtonText] = useState("NFID");
+  const [loggedIn, setLoggedIn] = useState(false);
   const buttonState = useRef<HTMLButtonElement>(null);
   const nfidStatus = useRef<HTMLDivElement>(null);
 
@@ -29,6 +31,7 @@ export function NFID(props: any) {
         changeProvider(theUserPrincipal);
         nfidStatus.current!.style.backgroundColor = "#42ff0f";
         setnfidButtonText("Connected!");
+        setLoggedIn(true);
         buttonState.current!.disabled = true;
         actor = await createInternetIdentityActor(identity);
         try {
@@ -59,12 +62,21 @@ export function NFID(props: any) {
   }
 
 // HTML(UI) returns stay inside of the export function
-
+  if (!loggedIn) {
   return (
     <>
       <div className="walletContainer">
-        <button ref={buttonState} onClick={manageLogin} id='nfidMenu'><p>{nfidButtonText}</p><div ref={nfidStatus} className='statusBubble' id='statusBubble'></div></button>
+        <button ref={buttonState} onClick={manageLogin} id='nfidMenu'><img src={NFIDLogo} /><p>{nfidButtonText}</p><div ref={nfidStatus} className='statusBubble' id='statusBubble'></div></button>
       </div>
     </>
-  )
+  );
+  } else {
+    return (
+      <>
+        <div className="walletContainer">
+          <button ref={buttonState} id='nfidMenu'><img src={NFIDLogo} /><p>{nfidButtonText}</p><div ref={nfidStatus} className='statusBubble' id='statusBubble'></div></button>
+        </div>
+      </>
+    );
+  }
 }

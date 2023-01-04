@@ -2,13 +2,15 @@ import React, { useRef, useState } from "react"
 import { Principal } from "@dfinity/principal";
 import { AuthClient } from "@dfinity/auth-client";
 import { Actor, HttpAgent, Identity } from "@dfinity/agent";
-import '../assets/index.css';
 import * as helloIDL from "../interfaces/hello";
+import DfinityLogo from "../assets/logos/dfinity.png"
+import '../assets/index.css';
 
 export function InternetIdentity(props: any) {
 
   const changeProvider = props.changeProvider;
-  const [plugButtonText, setPlugButtonText] = useState("II Connect");
+  const [plugButtonText, setPlugButtonText] = useState("Identity");
+  const [loggedIn, setLoggedIn] = useState(false);
   const buttonState = useRef<HTMLButtonElement>(null);
   const plugStatus = useRef<HTMLDivElement>(null);
 
@@ -24,6 +26,7 @@ export function InternetIdentity(props: any) {
         changeProvider(theUserPrincipal);
         plugStatus.current!.style.backgroundColor = "#42ff0f";
         setPlugButtonText("Connected!");
+        setLoggedIn(true);
         buttonState.current!.disabled = true;
         actor = await createInternetIdentityActor(identity);
         try {
@@ -55,12 +58,21 @@ export function InternetIdentity(props: any) {
 
 
 // HTML(UI) returns stay inside of the export function
-
-  return (
-    <>
-      <div className="walletContainer">
-        <button ref={buttonState} onClick={manageLogin} id='plugMenu'><p>{plugButtonText}</p><div ref={plugStatus} className='statusBubble' id='statusBubble'></div></button>
-      </div>
-    </>
-  )
+  if (!loggedIn) {
+    return (
+      <>
+        <div className="walletContainer">
+          <button ref={buttonState} onClick={manageLogin} id='plugMenu'><img src={DfinityLogo} /><p>{plugButtonText}</p><div ref={plugStatus} className='statusBubble' id='statusBubble'></div></button>
+        </div>
+      </>
+    );
+  } else {
+      return (
+        <>
+          <div className="walletContainer">
+            <button ref={buttonState} id='plugMenu'><img src={DfinityLogo} /><p>{plugButtonText}</p><div ref={plugStatus} className='statusBubble' id='statusBubble'></div></button>
+          </div>
+        </>
+      );
+  }
 }

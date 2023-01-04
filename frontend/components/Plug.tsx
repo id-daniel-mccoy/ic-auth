@@ -1,12 +1,14 @@
 import React, { useRef, useState } from "react"
 import { Principal } from "@dfinity/principal";
-import "../assets/index.css"
 import * as helloIDL from "../interfaces/hello";
+import PlugLogo from "../assets/logos/plug.png";
+import "../assets/index.css"
 
 export function PlugWallet(props: any) {
 
   const changeProvider = props.changeProvider;
-  const [plugButtonText, setPlugButtonText] = useState("Plug Connect");
+  const [plugButtonText, setPlugButtonText] = useState("Plug");
+  const [loggedIn, setLoggedIn] = useState(false);
   const buttonState = useRef<HTMLButtonElement>(null);
   const plugStatus = useRef<HTMLDivElement>(null);
 
@@ -29,6 +31,7 @@ export function PlugWallet(props: any) {
       changeProvider(theUserPrincipal);
       plugStatus.current!.style.backgroundColor = "#42ff0f";
       setPlugButtonText("Connected!");
+      setLoggedIn(true);
       buttonState.current!.disabled = true;
     }
   }
@@ -47,11 +50,21 @@ export function PlugWallet(props: any) {
 
 // HTML(UI) returns stay inside of the export function
 
-  return (
-    <>
-      <div className="walletContainer">
-        <button ref={buttonState} onClick={testPlug} id='plugMenu'><p>{plugButtonText}</p><div ref={plugStatus} className='statusBubble' id='statusBubble'></div></button>
-      </div>
-    </>
-  )
+  if (!loggedIn) {
+    return (
+      <>
+        <div className="walletContainer">
+          <button ref={buttonState} onClick={testPlug} id='plugMenu'><img src={PlugLogo} /><p>{plugButtonText}</p><div ref={plugStatus} className='statusBubble' id='statusBubble'></div></button>
+        </div>
+      </>
+    );
+  } else {
+    return (
+      <>
+        <div className="walletContainer">
+          <button ref={buttonState} id='plugMenu'><img src={PlugLogo} /><p>{plugButtonText}</p><div ref={plugStatus} className='statusBubble' id='statusBubble'></div></button>
+        </div>
+      </>
+    );
+  }
 }

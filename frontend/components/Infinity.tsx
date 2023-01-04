@@ -1,12 +1,14 @@
 import React, { useRef, useState } from "react"
 import { Principal } from "@dfinity/principal";
-import '../assets/index.css'
 import * as helloIDL from "../interfaces/hello";
+import InfinityLogo from "../assets/logos/infinity.png";
+import '../assets/index.css'
 
 export function InfinityWallet(props: any) {
 
   const changeProvider = props.changeProvider;
-  const [infinityButtonText, setInfinityButtonText] = useState("Infinity Connect");
+  const [infinityButtonText, setInfinityButtonText] = useState("Bitfinity");
+  const [loggedIn, setLoggedIn] = useState(false);
   const buttonState = useRef<HTMLButtonElement>(null);
   const infinityStatus = useRef<HTMLDivElement>(null);
 
@@ -16,6 +18,7 @@ export function InfinityWallet(props: any) {
     changeProvider(theUserPrincipal);
     infinityStatus.current!.style.backgroundColor = "#42ff0f";
     setInfinityButtonText("Connected!");
+    setLoggedIn(true);
     buttonState.current!.disabled = true;
   }
 
@@ -45,12 +48,21 @@ export function InfinityWallet(props: any) {
   }
 
 // HTML(UI) returns stay inside of the export function
-
+  if (!loggedIn) {
   return (
     <>
       <div className="walletContainer">
-        <button ref={buttonState} onClick={testInfinity} id='infinityMenu'><p>{infinityButtonText}</p><div ref={infinityStatus} className='statusBubble' id='statusBubble'></div></button>
+        <button ref={buttonState} onClick={testInfinity} id='infinityMenu'><img src={InfinityLogo} /><p>{infinityButtonText}</p><div ref={infinityStatus} className='statusBubble' id='statusBubble'></div></button>
       </div>
     </>
-  )
+  );
+  } else {
+    return (
+      <>
+        <div className="walletContainer">
+          <button ref={buttonState} id='infinityMenu'><img src={InfinityLogo} /><p>{infinityButtonText}</p><div ref={infinityStatus} className='statusBubble' id='statusBubble'></div></button>
+        </div>
+      </>
+    );
+  }
 }

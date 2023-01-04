@@ -46,7 +46,7 @@ button {
     background: none;
     border: 1px solid #12fff9;
     border-radius: 10px;
-    width: 180px;
+    width: 160px;
     height: 45px;
     font-size: 14px;
     text-align: center;
@@ -60,12 +60,24 @@ button {
 }
 
 button p {
-    float: left;
     width: 80%;
 }
 
 button:hover {
     background-color: rgba(255,255,255,0.1);
+    transform: scale(1.05);
+}
+
+button:disabled {
+    background: none;
+    border: 1px solid rgba(20, 255, 247, 0.5);
+    transform: none;
+    cursor: default;
+}
+
+button img {
+    width: 24px;
+    height: 24px;
 }
 
 .statusBubble {
@@ -90,4 +102,5 @@ button:hover {
 
 .walletContainer {
     margin: 10px;
+    margin-top: 15px;
 }
