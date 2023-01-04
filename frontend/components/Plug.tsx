@@ -48,23 +48,9 @@ export function PlugWallet(props: any) {
     console.log(result);
   }
 
-// HTML(UI) returns stay inside of the export function
-
-  if (!loggedIn) {
-    return (
-      <>
-        <div className="walletContainer">
-          <button ref={buttonState} onClick={testPlug} id='plugMenu'><img src={PlugLogo} /><p>{plugButtonText}</p><div ref={plugStatus} className='statusBubble' id='statusBubble'></div></button>
-        </div>
-      </>
-    );
-  } else {
-    return (
-      <>
-        <div className="walletContainer">
-          <button ref={buttonState} id='plugMenu'><img src={PlugLogo} /><p>{plugButtonText}</p><div ref={plugStatus} className='statusBubble' id='statusBubble'></div></button>
-        </div>
-      </>
-    );
-  }
+  return (
+    <div className="walletContainer">
+      <button ref={buttonState} onClick={!loggedIn ? testPlug : undefined} id='plugMenu'><img src={PlugLogo} /><p>{plugButtonText}</p><div ref={plugStatus} className='statusBubble' id='statusBubble'></div></button>
+    </div>
+  )
 }

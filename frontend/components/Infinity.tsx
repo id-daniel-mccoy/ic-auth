@@ -47,22 +47,9 @@ export function InfinityWallet(props: any) {
     console.log(result);
   }
 
-// HTML(UI) returns stay inside of the export function
-  if (!loggedIn) {
   return (
-    <>
-      <div className="walletContainer">
-        <button ref={buttonState} onClick={testInfinity} id='infinityMenu'><img src={InfinityLogo} /><p>{infinityButtonText}</p><div ref={infinityStatus} className='statusBubble' id='statusBubble'></div></button>
-      </div>
-    </>
-  );
-  } else {
-    return (
-      <>
-        <div className="walletContainer">
-          <button ref={buttonState} id='infinityMenu'><img src={InfinityLogo} /><p>{infinityButtonText}</p><div ref={infinityStatus} className='statusBubble' id='statusBubble'></div></button>
-        </div>
-      </>
-    );
-  }
+    <div className="walletContainer">
+      <button ref={buttonState} onClick={!loggedIn ? testInfinity : undefined} id='infinityMenu'><img src={InfinityLogo} /><p>{infinityButtonText}</p><div ref={infinityStatus} className='statusBubble' id='statusBubble'></div></button>
+    </div>
+  )
 }

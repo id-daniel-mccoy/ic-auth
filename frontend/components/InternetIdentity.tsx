@@ -56,23 +56,9 @@ export function InternetIdentity(props: any) {
     return actor;
   }
 
-
-// HTML(UI) returns stay inside of the export function
-  if (!loggedIn) {
-    return (
-      <>
-        <div className="walletContainer">
-          <button ref={buttonState} onClick={manageLogin} id='plugMenu'><img src={DfinityLogo} /><p>{plugButtonText}</p><div ref={plugStatus} className='statusBubble' id='statusBubble'></div></button>
-        </div>
-      </>
-    );
-  } else {
-      return (
-        <>
-          <div className="walletContainer">
-            <button ref={buttonState} id='plugMenu'><img src={DfinityLogo} /><p>{plugButtonText}</p><div ref={plugStatus} className='statusBubble' id='statusBubble'></div></button>
-          </div>
-        </>
-      );
-  }
+  return (
+    <div className="walletContainer">
+      <button ref={buttonState} onClick={!loggedIn ? manageLogin : undefined} id='plugMenu'><img src={DfinityLogo} /><p>{plugButtonText}</p><div ref={plugStatus} className='statusBubble' id='statusBubble'></div></button>
+    </div>
+  )
 }

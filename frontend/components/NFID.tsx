@@ -61,22 +61,9 @@ export function NFID(props: any) {
     return actor;
   }
 
-// HTML(UI) returns stay inside of the export function
-  if (!loggedIn) {
   return (
-    <>
-      <div className="walletContainer">
-        <button ref={buttonState} onClick={manageLogin} id='nfidMenu'><img src={NFIDLogo} /><p>{nfidButtonText}</p><div ref={nfidStatus} className='statusBubble' id='statusBubble'></div></button>
-      </div>
-    </>
-  );
-  } else {
-    return (
-      <>
-        <div className="walletContainer">
-          <button ref={buttonState} id='nfidMenu'><img src={NFIDLogo} /><p>{nfidButtonText}</p><div ref={nfidStatus} className='statusBubble' id='statusBubble'></div></button>
-        </div>
-      </>
-    );
-  }
+    <div className="walletContainer">
+      <button ref={buttonState} onClick={!loggedIn ? manageLogin : undefined} id='nfidMenu'><img src={NFIDLogo} /><p>{nfidButtonText}</p><div ref={nfidStatus} className='statusBubble' id='statusBubble'></div></button>
+    </div>
+  )
 }
