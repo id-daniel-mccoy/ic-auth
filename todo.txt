@@ -1,7 +1,3 @@
 Overall todo:
 
-- Create an index.js to set as the entrypoint for the npm package.
 - Wrap all UI components with exports coming from the index.js file.
-- Abstract and modularize each login with a universal agent/actor creation flow.
-- Ensure all necessary exports are wrapped and exported through the index.js file.
-- Create a dedicated types.ts file and export it through index.

@@ -1,11 +1,10 @@
 import { Principal } from '@dfinity/principal';
 import { Identity, HttpAgent, Actor } from '@dfinity/agent';
-import * as hello from './frontend/interfaces/hello';
-//@ts-ignore
-import { StoicIdentity } from 'ic-stoic-identity';
 import { AuthClient } from '@dfinity/auth-client';
 import * as types from "./frontend/types";
 import { InterfaceFactory } from '@dfinity/candid/lib/cjs/idl';
+//@ts-ignore
+import { StoicIdentity } from 'ic-stoic-identity';
 export { types };
 
 // A simple Stoic login flow with simplified return data.
@@ -58,7 +57,6 @@ export const PlugLogin = async(whitelist: string[]) : Promise<types.UserObject> 
     }
 }
 
-// Todo: Needs proper return from onSuccess.
 // A full featured NFID login flow with simplified return data.
 export const NFIDLogin = async (): Promise<types.UserObject> => {
     return new Promise<types.UserObject>(async (resolve, reject) => {
@@ -103,7 +101,6 @@ export const NFIDLogin = async (): Promise<types.UserObject> => {
   };
   
 
-// Todo: Needs proper return from onSuccess.
 // A fully featured Internet Identity login flow with simplified return data.
 export const IdentityLogin = async (): Promise<types.UserObject> => {
     return new Promise<types.UserObject>(async (resolve, reject) => {
