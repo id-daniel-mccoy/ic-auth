@@ -31,6 +31,7 @@ export function InfinityWallet(props: any) {
       changeProvider(theUserPrincipal);
       infinityStatus.current!.style.backgroundColor = "#42ff0f";
       setInfinityButtonText("Connected!");
+      setLoggedIn(true);
       buttonState.current!.disabled = true;
     }
   }

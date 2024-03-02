@@ -1,18 +1,19 @@
 {
   "name": "multi-wallet-menu",
-  "version": "0.5.5",
+  "version": "0.6.0",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "serve": "vite preview"
+    "serve": "vite preview",
+    "setup": "npm install && npm audit fix && dfx start --clean --background && dfx deploy && dfx stop && echo 'Setup complete!'"
   },
   "dependencies": {
-    "@dfinity/agent": "0.14.0",
-    "@dfinity/auth-client": "^0.14.0",
-    "@dfinity/authentication": "0.14.0",
-    "@dfinity/candid": "0.14.0",
-    "@dfinity/identity": "0.14.0",
-    "@dfinity/principal": "0.14.0",
+    "@dfinity/agent": "0.19.3",
+    "@dfinity/auth-client": "^0.19.3",
+    "@dfinity/authentication": "0.14.2",
+    "@dfinity/candid": "0.19.3",
+    "@dfinity/identity": "0.19.3",
+    "@dfinity/principal": "0.19.3",
     "react": "^17.0.2",
     "react-dom": "^17.0.2"
   },
