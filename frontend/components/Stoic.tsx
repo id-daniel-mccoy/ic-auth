@@ -1,7 +1,7 @@
 import React, { useState, useRef } from "react";
 // @ts-ignore
-import {StoicIdentity} from "ic-stoic-identity";
-import {Actor, HttpAgent} from "@dfinity/agent";
+import { StoicIdentity } from "ic-stoic-identity";
+import { Actor, HttpAgent } from "@dfinity/agent";
 import * as helloIDL from "../interfaces/hello";
 import StoicImage from "../assets/logos/stoic.png";
 import "../assets/index.css";

@@ -1,7 +1,7 @@
 import React from "react"
 import { StoicWallet as Stoic } from "./Stoic";
 import { PlugWallet as Plug} from "./Plug";
-import { InfinityWallet as Infinity} from "./Infinity";
+import { Bitfinity} from "./Bitfinity";
 import { InternetIdentity } from "./InternetIdentity";
 import { NFID } from "./NFID";
 import "../assets/index.css";
@@ -18,7 +18,7 @@ export function ICWalletList(props: any) {
     <div className="walletList">
       <Stoic changeProvider={changeUserAuth}/>
       <Plug changeProvider={changeUserAuth}/>
-      <Infinity changeProvider={changeUserAuth}/>
+      <Bitfinity changeProvider={changeUserAuth}/>
       <NFID changeProvider={changeUserAuth}/>
       <InternetIdentity changeProvider={changeUserAuth}/>
     </div>

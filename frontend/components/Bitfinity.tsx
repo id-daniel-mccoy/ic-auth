@@ -4,7 +4,7 @@ import * as helloIDL from "../interfaces/hello";
 import InfinityLogo from "../assets/logos/infinity.png";
 import '../assets/index.css'
 
-export function InfinityWallet(props: any) {
+export function Bitfinity(props: any) {
 
   const changeProvider = props.changeProvider;
   const [infinityButtonText, setInfinityButtonText] = useState("Bitfinity");
