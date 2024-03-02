@@ -1,5 +1,5 @@
 # Multi IC Wallet Menu
-## Version 0.5.6
+## Version 0.6.0
 
 A modular typescript react framework for a login menu that supports multiple internet computer login providers.
 
@@ -8,44 +8,51 @@ Currently Supported:
 * Stoic
 * Plug
 * Internet Identity
-* Bitfinity
 * NFID
 
 ### Getting Setup:
 
 You will need:
 
-* DFX 0.10.0+
+* DFX 0.15.1+
 * Node 18 + NPM
 
-### Clone and Install:
+### Clone and Setup:
+
+This project comes with an automated setup function. If you have all of the correct tools configured, just run the commands below!
 
 ```
 git clone https://github.com/cp-daniel-mccoy/multi-wallet-menu.git
 cd multi-wallet-menu
+npm run setup
+```
+
+### Manual Project Setup:
+
+If for some reason that does not work, here are the manal commands:
+
+```
 npm install
-```
-
-### Project Setup:
-
-```
+npm audit fix
 dfx start --clean --background
-dfx canister create --all
-dfx build
+dfx deploy
+dfx stop
 ```
 
 ### Dev/Production:
+
+To open up a local development instance with vite:
 
 Dev Mode:
 ```
 npm run dev
 ```
 
+To test a compiled build on a dedicated server:
+
 Production Mode:
 ```
 npm run serve
 ```
 
-Note: Make sure to stop your dfx replica when you are done testing. You can do this by runnning `dfx stop` in the root folder of your project.
-
-Author: cp-daniel-mccoy
+Author: Daniel McCoy
