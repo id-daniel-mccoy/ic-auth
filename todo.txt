@@ -1,3 +1,0 @@
-Overall todo:
-
-- Wrap all UI components with exports coming from the index.js file.
