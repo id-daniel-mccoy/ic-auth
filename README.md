@@ -1,5 +1,5 @@
 # Multi IC Wallet Menu
-## Version 0.6.0
+## Version 0.8.0
 
 A modular typescript react framework for a login menu that supports multiple internet computer login providers.
 

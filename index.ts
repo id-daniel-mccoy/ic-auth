@@ -105,37 +105,47 @@ export const NFIDLogin = async (): Promise<types.UserObject> => {
 
 // Todo: Needs proper return from onSuccess.
 // A fully featured Internet Identity login flow with simplified return data.
-export const IdentityLogin = async() : Promise<types.UserObject> => {
-    let identity : Identity;
-    let userObject : types.UserObject = {
-        principal: "Not Connnected.",
+export const IdentityLogin = async (): Promise<types.UserObject> => {
+    return new Promise<types.UserObject>(async (resolve, reject) => {
+      let identity: Identity;
+      let userObject: types.UserObject = {
+        principal: "Not Connected.",
         agent: undefined,
-        provider: "N/A"
-    }
-    const authClient = await AuthClient.create();
-    await authClient.login({
-        identityProvider: "https://identity.ic0.app",
-        onSuccess: async() => {
+        provider: "N/A",
+      };
+  
+      try {
+        const authClient = await AuthClient.create();
+        await authClient.login({
+          identityProvider: "https://identity.ic0.app",
+          onSuccess: async () => {
             identity = authClient.getIdentity();
             userObject = {
-                principal: Principal.from(identity.getPrincipal()).toText(),
-                agent: new HttpAgent({identity, host: "https://ic0.app"}),
-                provider: "Internet Identity"
+              principal: Principal.from(identity.getPrincipal()).toText(),
+              agent: new HttpAgent({ identity, host: "https://ic0.app" }),
+              provider: "Internet Identity",
             };
             console.log("Connected!");
             console.log(userObject);
-        },
-        onError: async(error: any) => {
+            resolve(userObject);
+          },
+          onError: async (error: any) => {
             userObject = {
-                principal: "Not Connnected.",
-                agent: undefined,
-                provider: "N/A"
+              principal: "Not Connected.",
+              agent: undefined,
+              provider: "N/A",
             };
             console.log("Error Logging In");
-        }
+            reject(error);
+          },
+        });
+      } catch (error) {
+        console.error("Error creating AuthClient:", error);
+        reject(error);
+      }
     });
-    return userObject;
-}
+  };
+  
 
 // A basic actor creation flow for calling canisters.
 export const CreateActor = async(agent: HttpAgent, idl: InterfaceFactory, canisterId: string) : Promise<Actor> => {
