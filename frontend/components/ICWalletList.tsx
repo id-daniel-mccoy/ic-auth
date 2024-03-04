@@ -14,6 +14,9 @@ export function ICWalletList(props: any) {
     giveToParent(user);
   }
 
+  const test = async(text: string) => {
+  }
+
   return (
     <div className="walletList">
       <Stoic changeProvider={changeUserAuth}/>
