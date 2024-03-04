@@ -1,35 +1,39 @@
-# Multi IC Wallet Menu
-## Version 0.8.2
+<div align="center">
+    <h3 style="font-size: 30px">Easy IC Login<h3>
+    <h3 style="font-size: 24px">Version 0.8.2</h3>
+</div>
+
+<br>
 
 A modular typescript react framework for a login menu that supports multiple internet computer login providers. This program comes wrapped with both UI elements and abstracted function calls to allow more complete integrations with ease.
 
-Currently Supported:
+Providers Currently Supported:
 
 * Stoic
 * Plug
 * Internet Identity
 * NFID
 
-### Getting Setup:
+<br>
 
-You will need:
+<h3 style="font-size: 24px" align="center">Using The NPM Package</h3>
 
-* DFX 0.15.1+
-* Node 18 + NPM
+<p align="center">If you are looking to use the NPM package version please follow these instructions:</p>
 
-### NPM Package Instructions:
-
-If you are looking to use the NPM package version please follow these instructions:
+<br>
 
 ### Getting Setup:
 
 ```
 npm install ic-auth && npm audit fix
 ```
+<br>
 
 ### Build Your Login:
 
 These steps are for creating your own simple login UI/UX using the modular functions. A more advanced design will be shown below.
+
+<br>
 
 #### Step 1 - Import:
 
@@ -38,6 +42,8 @@ Import the providers you want to support.
 ```ts
 import { PlugLogin, StoicLogin, NFIDLogin, IdentityLogin } from 'ic-auth';
 ```
+
+<br>
 
 #### Step 2 - Handle Your Login:
 
@@ -53,6 +59,8 @@ const handleLogin = async() => {
 }
 ```
 
+<br>
+
 #### Step 3 - Attach To Your UI:
 
 Take the login handler and attach it to a UI element of your choice.
@@ -60,6 +68,8 @@ Take the login handler and attach it to a UI element of your choice.
 ```html
 <button onClick={handleLogin}>Login</button>
 ```
+
+<br>
 
 #### Step 4 - Using The Login
 
@@ -94,9 +104,22 @@ const handleLogin = async() => {
 }
 ```
 
+<br>
+
+## Login Menu Example Project
+
+These are instructions for setting up and running the example version of this package. This will show a finished menu UI template that can be used or styled to your liking.
+
+### Getting Setup:
+
+You will need:
+
+* DFX 0.15.1+
+* Node 18 + NPM
+
 ### Clone and Setup:
 
-This project comes with an automated setup function. If you have all of the correct tools configured, just run the commands below!
+This project comes with an automated setup function. If you have all of the correct tools configured, just run the commands below.
 
 ```
 git clone https://github.com/cp-daniel-mccoy/multi-wallet-menu.git

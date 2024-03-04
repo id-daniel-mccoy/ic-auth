@@ -4,4 +4,5 @@ dist
 dist-ssr
 *.local
 .dfx
-// test
+todo.txt
+canister_ids.json
