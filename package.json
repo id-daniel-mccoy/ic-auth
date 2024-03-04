@@ -1,6 +1,6 @@
 {
   "name": "ic-auth",
-  "version": "0.8.2",
+  "version": "0.8.3",
   "description": "A simple to use, modular package for integrating Internet Computer authentication providers into your app.",
   "author": "Daniel McCoy (https://danielmccoy.us/)",
   "license": "MIT",
@@ -16,7 +16,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/id-daniel-mccoy/multi-wallet-menu.git"
+    "url": "https://github.com/id-daniel-mccoy/ic-auth.git"
   },
   "main": "index.js",
 
