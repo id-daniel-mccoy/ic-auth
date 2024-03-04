@@ -1,13 +1,11 @@
-<div align="center">
-    <h3 style="font-size: 30px">Easy IC Login<h3>
-    <h3 style="font-size: 24px">Version 0.8.2</h3>
-</div>
+# Easy IC Login
+## Version 0.8.2
 
 <br>
 
 A modular typescript react framework for a login menu that supports multiple internet computer login providers. This program comes wrapped with both UI elements and abstracted function calls to allow more complete integrations with ease.
 
-Providers Currently Supported:
+Currently Supported:
 
 * Stoic
 * Plug
@@ -16,9 +14,9 @@ Providers Currently Supported:
 
 <br>
 
-<h3 style="font-size: 24px" align="center">Using The NPM Package</h3>
+## NPM Package Instructions:
 
-<p align="center">If you are looking to use the NPM package version please follow these instructions:</p>
+If you are looking to use the NPM package version please follow these instructions:
 
 <br>
 
@@ -27,6 +25,7 @@ Providers Currently Supported:
 ```
 npm install ic-auth && npm audit fix
 ```
+
 <br>
 
 ### Build Your Login:
@@ -106,9 +105,11 @@ const handleLogin = async() => {
 
 <br>
 
-## Login Menu Example Project
+### Login Menu Example Project
 
 These are instructions for setting up and running the example version of this package. This will show a finished menu UI template that can be used or styled to your liking.
+
+<br>
 
 ### Getting Setup:
 
@@ -116,6 +117,8 @@ You will need:
 
 * DFX 0.15.1+
 * Node 18 + NPM
+
+<br>
 
 ### Clone and Setup:
 
@@ -126,6 +129,8 @@ git clone https://github.com/cp-daniel-mccoy/multi-wallet-menu.git
 cd multi-wallet-menu
 npm run setup
 ```
+
+<br>
 
 ### Manual Project Setup:
 
@@ -138,6 +143,8 @@ dfx start --clean --background
 dfx deploy
 dfx stop
 ```
+
+<br>
 
 ### Dev/Production:
 
