@@ -7,6 +7,7 @@ import * as hello from './frontend/interfaces/hello';
 //@ts-ignore
 import { StoicIdentity } from 'ic-stoic-identity';
 export { types as Types };
+import { ActorSubclass, ActorMethod } from '@dfinity/agent';
 
 export const HelloIDL = hello.idlFactory;
 
@@ -148,7 +149,7 @@ export const IdentityLogin = async (): Promise<types.UserObject> => {
   
 
 // A basic actor creation flow for calling canisters.
-export const CreateActor = async(agent: HttpAgent, idl: InterfaceFactory, canisterId: string) : Promise<Actor> => {
+export const CreateActor = async(agent: HttpAgent, idl: InterfaceFactory, canisterId: string) : Promise<ActorSubclass<Record<string, ActorMethod<unknown[], unknown>>>> => {
     const actor = Actor.createActor(idl, {
         agent: agent,
         canisterId: canisterId

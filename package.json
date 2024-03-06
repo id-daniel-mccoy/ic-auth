@@ -1,6 +1,6 @@
 {
   "name": "ic-auth",
-  "version": "0.8.5",
+  "version": "0.8.7",
   "description": "A simple to use, modular package for integrating Internet Computer authentication providers into your app.",
   "author": "Daniel McCoy (https://danielmccoy.us/)",
   "license": "MIT",
@@ -32,6 +32,7 @@
     "@dfinity/candid": "0.19.3",
     "@dfinity/identity": "0.19.3",
     "@dfinity/principal": "0.19.3",
+    "ic-stoic-identity": "^2.0.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2"
   },

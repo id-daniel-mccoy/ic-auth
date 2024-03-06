@@ -1,5 +1,5 @@
 # IC-Auth
-## Version 0.8.5
+## Version 0.8.7
 
 <br>
 
@@ -96,7 +96,7 @@ const whitelist = ["oyjva-2yaaa-aaaam-qbaya-cai"];
 const handleLogin = async() => {
     const userObject = await PlugLogin(whitelist);
     console.log(userObject);
-    const actor = await CreateActor(userObject.agent, HelloIDL, canisterID);
+    const actor = await CreateActor(userObject.agent!, HelloIDL, canisterID);
     const result = await actor.hello();
     console.log(result);
     // Handle code will go here...
@@ -159,7 +159,7 @@ const handleLogin = async(provider: string) => {
         userObject = await IdentityLogin();
     }
     console.log(userObject);
-    const actor = await CreateActor(userObject.agent, HelloIDL, canisterID);
+    const actor = await CreateActor(userObject.agent!, HelloIDL, canisterID);
     const result = await actor.hello();
     console.log(result);
     // Handle code will go here...
