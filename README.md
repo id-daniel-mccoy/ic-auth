@@ -115,10 +115,10 @@ This example will bring you through the steps of building a login flow that supp
 
 #### Step 1: Basic Setup
 
-Following steps 1 and 2 from above, start with importing the functions from the package, creating the canister whitelist, and making the handler.
+Following steps 1 and 2 from above, start with importing the functions from the package, creating the canister whitelist, and making the handler. You will also need the type definitions for this.
 
 ```ts
-import { PlugLogin, StoicLogin, NFIDLogin, IdentityLogin } from 'ic-auth';
+import { PlugLogin, StoicLogin, NFIDLogin, IdentityLogin, Types } from 'ic-auth';
 
 const canisterID = "oyjva-2yaaa-aaaam-qbaya-cai";
 const whitelist = ["oyjva-2yaaa-aaaam-qbaya-cai"];
@@ -137,14 +137,14 @@ const handleLogin = async() => {
 Add a string argument that the handler can use to determine which login function to execute, then edit the handler to use it.
 
 ```ts
-import { PlugLogin, StoicLogin, NFIDLogin, IdentityLogin } from 'ic-auth';
+import { PlugLogin, StoicLogin, NFIDLogin, IdentityLogin, Types } from 'ic-auth';
 import { HelloIDL, CreateActor } from 'ic-auth';
 
 const canisterID = "oyjva-2yaaa-aaaam-qbaya-cai";
 const whitelist = ["oyjva-2yaaa-aaaam-qbaya-cai"];
 
 const handleLogin = async(provider: string) => {
-    let userObject = {
+    let userObject: Types.UserObject = {
         principal: "Not Connected.",
         agent: undefined,
         provider: "N/A"
