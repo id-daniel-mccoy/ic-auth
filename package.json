@@ -1,6 +1,6 @@
 {
   "name": "ic-auth",
-  "version": "0.8.7",
+  "version": "0.9.0",
   "description": "A simple to use, modular package for integrating Internet Computer authentication providers into your app.",
   "author": "Daniel McCoy (https://danielmccoy.us/)",
   "license": "MIT",
