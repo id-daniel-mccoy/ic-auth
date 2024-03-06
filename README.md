@@ -1,5 +1,5 @@
 # IC-Auth
-## Version 0.8.3
+## Version 0.8.4
 
 <br>
 
@@ -79,6 +79,8 @@ type UserObject = {
     provider: string
 }
 ```
+
+Tip: You can also import the type definitions for this package by adding `Types` to your import line.
 
 It can be used to create an actor for canister calls, display the user's principal address, or trigger code depending on the provider chosen. This example shows how to create an actor using the `CreateActor` function.
 

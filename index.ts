@@ -3,9 +3,12 @@ import { Identity, HttpAgent, Actor } from '@dfinity/agent';
 import { AuthClient } from '@dfinity/auth-client';
 import * as types from "./frontend/types";
 import { InterfaceFactory } from '@dfinity/candid/lib/cjs/idl';
+import * as hello from './frontend/interfaces/hello';
 //@ts-ignore
 import { StoicIdentity } from 'ic-stoic-identity';
-export { types };
+export { types as Types };
+
+export const HelloIDL = hello.idlFactory;
 
 // A simple Stoic login flow with simplified return data.
 export const StoicLogin = async() : Promise<types.UserObject> => {
