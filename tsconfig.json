@@ -15,13 +15,15 @@
     "allowSyntheticDefaultImports": true,
     "strict": true,
     "forceConsistentCasingInFileNames": true,
-    "module": "ESNext",
+    "module": "CommonJS",
     "moduleResolution": "Node",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "noEmit": true,
+    "noEmit": false,
     "jsx": "react",
-    "baseUrl": "."
+    "baseUrl": ".",
+    "outDir": "./dist",
+    "declaration": true
   },
   "include": [
     "./frontend"
